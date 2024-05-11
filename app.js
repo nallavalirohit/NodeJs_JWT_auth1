@@ -5,6 +5,7 @@ require('dotenv').config();
 require('./helpers/mongoDB_connect')
 
 const authRoute = require('./Routes/auth.routes');
+const { verifyAccessToken } = require('./helpers/jwt_generator');
 
 const app = express();
 app.use(morgan('dev'));
@@ -13,7 +14,9 @@ app.use(express.urlencoded({extended:true}))
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', async(req, res, next)=>{
+app.get('/', verifyAccessToken, async(req, res, next)=>{
+    // console.log(req.headers['authorization']);
+    console.log(req.payload);
     res.send('Hello from express');
 });
 

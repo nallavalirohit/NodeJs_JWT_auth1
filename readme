@@ -17,3 +17,4 @@ Steps to create Auth app
 - handling the request/response in auth.routes.js to register a new user
 - Validating the email/password using JOI schema validation.
 - Hashing passwords using bcrypt before saving it to the DB
+- Introducing JWT access token
