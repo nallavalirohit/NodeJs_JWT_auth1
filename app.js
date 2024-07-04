@@ -1,11 +1,32 @@
 const express = require('express');
 const morgan = require('morgan');
 const createError = require('http-errors');
+const redis = require('redis');
 require('dotenv').config();
 require('./helpers/mongoDB_connect')
 
 const authRoute = require('./Routes/auth.routes');
 const { verifyAccessToken } = require('./helpers/jwt_generator');
+
+const client = require('./helpers/redis_client');
+
+const main = async () => {
+  await client.connect();
+
+//   await client.set('foo', 'bar');
+//   console.log("Before loop exit");
+
+//   client.get('foo', (err, value) => {
+//     if (err) throw err;
+//     console.log('GET result -> ', value);
+//     console.log("After loop exit");
+//   });
+
+    // const val = await client.get('foo');
+    // val ? console.log('GET result -> ', val) : console.log('No key found');
+}
+main();
+
 
 const app = express();
 app.use(morgan('dev'));
