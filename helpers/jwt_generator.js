@@ -50,7 +50,7 @@ module.exports = {
       const payload = {};
       const secret = process.env.REFRESH_TOKEN_SECRET;
       const options = {
-        expiresIn: "30s",
+        expiresIn: "1d",
         issuer: "espn.com",
         audience: userId,
       };
@@ -60,7 +60,7 @@ module.exports = {
           return reject(createError.InternalServerError());
         }
         try {
-          client.SET(userId, token, { EX: 30 });
+          client.SET(userId, token, { EX: 24*60*60 });
           resolve(token);
         } catch (error) {
           console.log(error);
